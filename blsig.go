@@ -1,7 +1,7 @@
 // Pacakage blsig implements BLS (short) signatures and signature aggregation
 // on bilinear pairing curveBLS12-381.
 
-package blsig // import "github.com/dis2/bls12"
+package blsig // import "github.com/dis2/blsig"
 
 import "github.com/dis2/bls12"
 import "crypto/sha256"
