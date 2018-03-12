@@ -1,6 +1,5 @@
-// Pacakage blsig implements BLS (short) signatures and signature aggregation
-// on bilinear pairing curveBLS12-381.
-
+// Package blsig implements BLS (short) signatures and signature aggregation
+// on bilinear pairing curve BLS12-381.
 package blsig // import "github.com/dis2/blsig"
 
 import "github.com/dis2/bls12"
@@ -22,7 +21,7 @@ func GenPrivKey(seed []byte) (k *PrivKey) {
 }
 
 // Public key from private key.
-func (sk *PrivKey) Public() ([]byte) {
+func (sk *PrivKey) Public() []byte {
 	return new(bls12.G2).ScalarBaseMult(&sk.Scalar).Marshal()
 }
 
@@ -94,5 +93,3 @@ func VerifyAggregate(msgs [][]byte, keys [][]byte, aggsig []byte, allowdupe bool
 	}
 	return e1.Equal(e2)
 }
-
-

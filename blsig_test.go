@@ -17,8 +17,8 @@ func TestSigVerify(t *testing.T) {
 	sig2 := sk2.Sign(msg2)
 	ok2 := Verify(msg2, pk2, sig2)
 
-	agg := Aggregate([][]byte{sig,sig2})
-	aggok := VerifyAggregate([][]byte{msg,msg2}, [][]byte{pk,pk2}, agg, true)
+	agg := Aggregate([][]byte{sig, sig2})
+	aggok := VerifyAggregate([][]byte{msg, msg2}, [][]byte{pk, pk2}, agg, true)
 
 	if !ok1 {
 		t.Fatal("sig1 failed")
@@ -30,4 +30,3 @@ func TestSigVerify(t *testing.T) {
 		t.Fatal("aggregate signature failed")
 	}
 }
-
