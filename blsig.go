@@ -79,7 +79,7 @@ func VerifyAggregate(msgs [][]byte, keys [][]byte, aggsig []byte, allowdupe bool
 	if ag.Unmarshal(aggsig) == nil {
 		return false
 	}
-	e1 := new(bls12.GT).Pair(&ag, new(bls12.G2).SetOne())
+	e1 := new(bls12.GT).Pair(&ag, bls12.G2One())
 	p1 := new(bls12.G1).HashToPoint(msgs[0])
 	var p2 bls12.G2
 	if p2.Unmarshal(keys[0]) == nil {
