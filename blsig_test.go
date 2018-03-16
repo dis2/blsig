@@ -18,7 +18,7 @@ func TestSigVerify(t *testing.T) {
 	ok2 := Verify(msg2, pk2, sig2)
 
 	agg := Aggregate([][]byte{sig, sig2})
-	aggok := VerifyAggregate([][]byte{msg, msg2}, [][]byte{pk, pk2}, agg, true)
+	aggok := VerifyAggregate([][]byte{msg,msg2}, [][]byte{pk, pk2}, agg, true)
 
 	if !ok1 {
 		t.Fatal("sig1 failed")

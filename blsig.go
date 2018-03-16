@@ -4,14 +4,19 @@ package blsig // import "github.com/dis2/blsig"
 
 import "github.com/dis2/bls12"
 import "crypto/sha256"
+import "crypto/rand"
 
 // Represents a private scalar.
 type PrivKey struct {
 	bls12.Scalar
 }
 
-// Generate new private key, from seed, or random if nil.
+// Generate terministic private key from a private seed, or random if nil.
 func GenPrivKey(seed []byte) (k *PrivKey) {
+	if seed == nil {
+		seed = make([]byte, 64)
+		rand.Read(seed)
+	}
 	buf := sha256.Sum256(seed)
 	// clamp to 2^254-1
 	buf[0] &= 0x3f
@@ -30,8 +35,7 @@ func Verify(msg, pk, sig []byte) bool {
 	return VerifyAggregate([][]byte{msg}, [][]byte{pk}, sig, true)
 }
 
-// Sign message m, and return detached signature. pk *should* be the public key
-// matching the private key we're signing with.
+// Sign message m, and return signature data.
 func (sk *PrivKey) Sign(m []byte) (sig []byte) {
 	return new(bls12.G1).HashToPoint(m).ScalarMult(&sk.Scalar).Marshal()
 }
